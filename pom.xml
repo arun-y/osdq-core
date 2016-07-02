@@ -4,9 +4,9 @@
 
     <groupId>org.arrahtec</groupId>
     <artifactId>profiler</artifactId>
-    <version>6.1.8-SNAPSHOT</version>
+    <version>6.1.7</version>
     <packaging>pom</packaging>
-
+    <description>The open source data quality</description>
     <name>profiler</name>
     <url>http://www.arrahtec.org</url>
     <scm>
@@ -120,7 +120,8 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
+			<version>1.6</version>
+			<executions>
                             <execution>
                                 <id>sign-artifacts</id>
                                 <phase>verify</phase>

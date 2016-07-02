@@ -6,11 +6,11 @@
 	<parent>
 		<groupId>org.arrahtec</groupId>
 		<artifactId>profiler</artifactId>
-		<version>6.1.8-SNAPSHOT</version>
+		<version>6.1.7</version>
 	</parent>
 	<groupId>org.arrahtec</groupId>
 	<artifactId>profiler-core</artifactId>
-	<version>6.1.8-SNAPSHOT</version>
+	<version>6.1.7</version>
 	<name>profiler-core</name>
 	<url>http://www.arrahtec.org</url>
 	<properties>
@@ -37,13 +37,15 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.4.0</version>
 		</dependency>
+		<!--
 		<dependency>
 		  <groupId>javax.sql</groupId>
 		  <artifactId>rowset</artifactId>
 		   <version>0.0</version>
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/rowset.jar</systemPath>
-		</dependency>
+      </dependency>
+		-->
 		<dependency>
 			<groupId>saxon</groupId>
 			<artifactId>saxon</artifactId>
@@ -70,7 +72,7 @@
 		    <artifactId>derby</artifactId>
 		    <version>10.12.1.1</version>
 		</dependency>
-		<!-- NON MAVENIZED JDBC JARS -->
+		<!-- NON MAVENIZED JDBC JARS 
     <dependency>
       <groupId>db2jcc4</groupId>
       <artifactId>db2jcc4</artifactId>
@@ -99,7 +101,7 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/ifxjdbc.jar</systemPath>
     </dependency>
-		<!-- END OF JDBC DRIVER -->
+		- END OF JDBC DRIVER -->
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
