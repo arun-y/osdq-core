@@ -22,10 +22,13 @@ package org.arrah.framework.datagen;
 import java.util.Date;
 
 import org.arrah.framework.ndtable.ReportTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class SplitRTM {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(SplitRTM.class);
 
 	public SplitRTM() {
 		
@@ -111,7 +114,7 @@ public class SplitRTM {
 				
 				
 			} catch (Exception e) {
-				System.out.println("Exception:" + e.getLocalizedMessage());
+				LOGGER.error("Exception: {}", e.getLocalizedMessage());
 			}
 		}
 		

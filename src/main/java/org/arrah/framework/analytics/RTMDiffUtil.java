@@ -22,9 +22,12 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import org.arrah.framework.ndtable.ReportTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RTMDiffUtil {	
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(RTMDiffUtil.class);
 	private ReportTableModel leftRTM = null, rightRTM = null;
 	private boolean allColMatch = false;
 	private Vector<Integer> leftIndex = null, rightIndex = null;
@@ -84,7 +87,7 @@ public class RTMDiffUtil {
 	{
 		// return true is comparison is successful
 		if (leftRTM == null || rightRTM == null) {
-			System.out.println("Can not Compare Null Table(s)");
+			LOGGER.warn("Can not Compare Null Table(s)");
 			return false;
 		}
 		if ( (leftIndex != null && rightIndex == null) || (leftIndex == null && rightIndex != null) )
@@ -92,7 +95,7 @@ public class RTMDiffUtil {
 				
 		if (leftIndex != null && rightIndex != null) 
 			if (leftIndex.size() != rightIndex.size() ) {
-				System.out.println("Left and Right Columns are not Mapped");
+				LOGGER.warn("Left and Right Columns are not Mapped");
 				return false;
 			}
 		
@@ -326,7 +329,7 @@ public class RTMDiffUtil {
 		HashMap<Integer, Vector<Integer>>  diffIndex = new HashMap<Integer,Vector<Integer>>();
 		// return true is comparison is successful
 		if (leftRTM == null || rightRTM == null) {
-			System.out.println("Can not Compare Null Table(s)");
+			LOGGER.warn("Can not Compare Null Table(s)");
 			return diffIndex;
 		}
 		if ( (leftIndex != null && rightIndex == null) || (leftIndex == null && rightIndex != null) )
@@ -334,7 +337,7 @@ public class RTMDiffUtil {
 				
 		if (leftIndex != null && rightIndex != null) 
 			if (leftIndex.size() != rightIndex.size() ) {
-				System.out.println("Left and Right Columns are not Mapped");
+				LOGGER.warn("Left and Right Columns are not Mapped");
 				return diffIndex;
 			}
 		

@@ -23,9 +23,13 @@ import java.util.Vector;
 
 import org.arrah.framework.ndtable.ReportTableModel;
 import org.arrah.framework.profile.StatisticalAnalysis;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class NormalizeCol {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(NormalizeCol.class);
 
 	public NormalizeCol() {
 		
@@ -262,7 +266,7 @@ public class NormalizeCol {
 						}
 						
 					} catch (Exception e) {
-						System.out.println("Exception:"+ e.getLocalizedMessage());
+						LOGGER.error("Exception: {}", e.getLocalizedMessage());
 						factor = null;
 					}
 			}

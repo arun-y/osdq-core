@@ -24,9 +24,12 @@ import java.util.List;
 import java.util.Vector;
 
 import org.arrah.framework.ndtable.ReportTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TabularReport  {
-	
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(TabularReport.class);
 	
 	// Utility function to create tabular report from master
 	// _reportColV will have index of column name for new Table
@@ -104,7 +107,7 @@ public class TabularReport  {
 					try {
 					row[j] = Math.abs((Double)(_rt.getModel().getValueAt(i,_reportColV.get(j))));
 					} catch (Exception e) {
-						System.out.println("\n Can not cast table value as Number");
+						LOGGER.warn("\n Can not cast table value as Number");
 					}
 				} else if ( fieldVal == 3) { // Count
 					row[j] = (Double)existingCount.doubleValue();
@@ -138,7 +141,7 @@ public class TabularReport  {
 							newRT.getModel().setValueAt(newVal, existingrowid.intValue(), j);
 							k++;
 						} else {
-							System.out.println("\n Value is not Number");
+							LOGGER.warn("\n Value is not Number");
 						}
 					}		
 						

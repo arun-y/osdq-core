@@ -23,8 +23,12 @@ import java.util.Random;
 import java.util.Vector;
 
 import org.arrah.framework.util.Language;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RandomColGen {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(RandomColGen.class);
 	private int _rowC = 0;
 
 	public RandomColGen(int rowc) {
@@ -92,9 +96,8 @@ public class RandomColGen {
 		int minCodePoint = getRangeOfUnicode(lan, true);
 		int maxCodePoint = getRangeOfUnicode(lan, false);
 
-		System.out
-				.println("\n Information: Make sure fonts are available for selected language");
-		System.out.println("\n or Character may not appear.");
+		LOGGER.info("Information: Make sure fonts are available for selected language");
+		LOGGER.info("or Character may not appear.");
 		Vector<String> _vc = new Vector<String>();
 
 		Random rd = new Random();

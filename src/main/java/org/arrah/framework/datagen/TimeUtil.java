@@ -24,10 +24,13 @@ import java.util.Vector;
 
 import org.jfree.data.time.RegularTimePeriod;
 import org.jfree.data.time.TimeSeries;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class TimeUtil {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(TimeUtil.class);
 	private static Calendar cal = Calendar.getInstance();
 	private static String OTHER = "UNDEFINED"; // Null or Undefined Key
 	private static Vector<Integer> monthV = new Vector<Integer>();
@@ -405,8 +408,8 @@ public class TimeUtil {
 				fcdataset.add(nexttp,0.00D);
 			}
 		} catch (Exception e) {
-			System.out.println("Exception:" + e.getLocalizedMessage());
-			System.out.println("Could not create forecasted data sample");
+			LOGGER.error("Exception: {}", e.getLocalizedMessage());
+			LOGGER.error("Could not create forecasted data sample");
 			return fcdataset;
 		}
 		

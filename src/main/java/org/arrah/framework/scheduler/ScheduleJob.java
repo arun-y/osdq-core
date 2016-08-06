@@ -18,10 +18,13 @@ import org.arrah.framework.xml.XmlReader;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class ScheduleJob implements Job{
-		
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ScheduleJob.class);
 	
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		
@@ -72,7 +75,7 @@ public class ScheduleJob implements Job{
 			 if(columnNames != null && "".equals(columnNames) == false)
 					rs = dbConn.execute(query);
 					else {
-						System.out.println("Column is Empty");
+						LOGGER.warn("Column is Empty");
 						throw new JobExecutionException("Column is Empty");
 			}
 			 
@@ -80,7 +83,7 @@ public class ScheduleJob implements Job{
 			 if(query != null )
 				rs = dbConn.execute(query);
 				else {
-					System.out.println("Query is null");
+					LOGGER.warn("Query is null");
 					throw new JobExecutionException("Query is null");
 			}
 								
@@ -114,23 +117,21 @@ public class ScheduleJob implements Job{
 					
 		            }
 			
-				 	System.out.println("Job executed");	
+				 	LOGGER.info("Job executed");
 				 		
 			
 		}  catch (SQLException e) {
-			System.out.println("Job failed because of SQL Exception" + e);
-			e.printStackTrace();
+			LOGGER.error("Job failed because of SQL Exception {}", e);
 		}
 		catch (Exception e) {
-			System.out.println("Job failed with an exception" + e);
-			e.printStackTrace();
+			LOGGER.error("Job failed with an exception {}", e);
 		}
 		finally{
 			try {
 				out.close();
-				System.out.println("File Saved at:"+file.getAbsolutePath());
+				LOGGER.info("File Saved at: {}", file.getAbsolutePath());
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOGGER.error("Error closing output stream{}", e);
 			}  
 		}
 	

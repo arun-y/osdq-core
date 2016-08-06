@@ -25,8 +25,12 @@ import net.sourceforge.jeval.EvaluationException;
 import net.sourceforge.jeval.Evaluator;
 
 import org.arrah.framework.ndtable.ReportTableModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExpressionBuilder {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExpressionBuilder.class);
 	final static private String START_TOKEN = "#{";
 	final static private String END_TOKEN = "}";
 
@@ -65,8 +69,8 @@ public class ExpressionBuilder {
 			if (i < 0) {
 				int j = findColumn( rpt,  colName, aggrColVal);
 			if (j < 0) {
-				System.out.println("\n ERROR:Column Name Not Found in Table:"
-						+ colName);
+				LOGGER.error("\n ERROR:Column Name Not Found in Table: {}"
+						, colName);
 				return null;
 			} }
 			colTable.put(colName, i);  // i negative for aggr cum values
@@ -85,7 +89,7 @@ public class ExpressionBuilder {
 					eva.putVariable(colName,val.get(0).toString()); // first member
 			}
 			} catch (Exception e) {
-				System.out.println("\n Exception :"+e);
+				LOGGER.error("\n Exception : ", e);
 				return null;
 			}
 		} // End of while loop
@@ -100,7 +104,7 @@ public class ExpressionBuilder {
 			if (expression.startsWith("IF") == true ) {
 				int thenIndex = expression.indexOf(" THEN ",2); // it has to come after if
 				if (thenIndex < 0) { // IF must have THEN clause
-					System.out.println("Format error  IF (condition) THEN expression");
+					LOGGER.error("Format error  IF (condition) THEN expression");
 					return null;
 				}
 				// First check IF condition is OK
@@ -124,7 +128,7 @@ public class ExpressionBuilder {
 			if (selIndex < 0)
 				return jevalString;
 		} catch (EvaluationException ee) {
-			System.out.println("\n WARNING: Parsing Falied " + ee.getMessage());
+			LOGGER.warn("Parsing Falied {}", ee.getMessage());
 			return jevalString;
 		}
 
@@ -175,8 +179,8 @@ public class ExpressionBuilder {
 				} else 
 				jevalString = eva.evaluate(false, false);
 			} catch (EvaluationException ee) {
-				System.out.println("\n Parse WARNING:  Row id: " + (i + 1)
-						+ " :" + ee.getMessage());
+				LOGGER.warn("Parse WARNING:  Row id: {} : {}", (i + 1)
+						, ee.getMessage());
 				rpt.getModel().setValueAt(null, i, selIndex);
 				continue;
 			}
@@ -185,8 +189,8 @@ public class ExpressionBuilder {
 					rpt.getModel().setValueAt(Double.parseDouble(jevalString),
 							i, selIndex);
 				} catch (NumberFormatException exp) {
-					System.out.println("\n Format WARNING:  Row id: " + (i + 1)
-							+ " :" + exp.getMessage());
+					LOGGER.warn("Format WARNING:  Row id: {} : {}", (i + 1)
+							, exp.getMessage());
 					rpt.getModel().setValueAt(null, i, selIndex);
 
 				}

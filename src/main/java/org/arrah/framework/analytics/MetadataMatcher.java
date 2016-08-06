@@ -11,6 +11,8 @@ import org.arrah.framework.rdbms.QueryBuilder;
 import org.arrah.framework.rdbms.Rdbms_conn;
 import org.arrah.framework.util.StringCaseFormatUtil;
 import org.simmetrics.metrics.JaroWinkler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /***********************************************
  *     Copyright to Vivek Kumar Singh  2016    *
@@ -31,6 +33,9 @@ import org.simmetrics.metrics.JaroWinkler;
 
 
 public class MetadataMatcher {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(MetadataMatcher.class);
+
 	private Hashtable<String,String> _ht;
 	private confidenceL confidenceLevel;
 	
@@ -145,7 +150,7 @@ public class MetadataMatcher {
 		 else if (table instanceof ReportTableModel)
 			 colD = ((ReportTableModel)table).getColDataRandom(col,10);
 		 else {
-			 System.out.println("Table Type not recognised.");
+			 LOGGER.warn("Table Type not recognised.");
 			 return colD;
 		 }
 				 
@@ -224,7 +229,7 @@ public class MetadataMatcher {
 			rs.close();
 			Rdbms_conn.closeConn();
 		} catch (SQLException exp) {
-			System.out.println("Column fetch error:"+ exp.getLocalizedMessage());
+			LOGGER.error("Column fetch error: {}", exp);
 			return coldata;
 
 		}
